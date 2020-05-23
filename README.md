@@ -40,7 +40,7 @@ My suggested solution implemented the ideas of:
 - the Highcharts script running in the HTML of the Web Browser requests data from the ESP32 every 10 seconds (can be configured in HTML file)
 - the ESP32 added a handler in the WebServer to send the data after each GET requests back to the Browser script,
 - a Highcharts mult-line graph needs multiple data compiled into a JSON object to be returned,
-- access also this logging features by just opening the IP address in the Web Browser,
+- access also the Highcharts logging features by just opening the IP address in the Web Browser,
 <br/>
 
 <img src="doc/ESP32_Highcharts.jpg" width="500">
