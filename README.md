@@ -3,7 +3,9 @@ Automatic long-term logging for remote ESP32 IoT devices, by the Web Browser or 
 
 read time: 30 min / understand time: 1 hour / test-it-out time: 1 hours
 
-## This project will tell you a story you may already know well: after many days of developing an IoT device and spending also some nights to test it in your workroom, you finally install it in the target location. <br/>Then, after many days of bugless work, you surprisingly encounter some wrong results in the IoT data. <br/>Such errors can be seldom and hard to debug, out there in the real world environment ... so you need a remote logger for your ESP32!
+This project will tell you a story you may already know well: after many days of developing an IoT device and spending also some nights to test it in your workroom, you finally install it in the target location.
+Then, after many days of bugless work, you surprisingly encounter some wrong results in the IoT data.
+## Such errors can occure seldomly and are hard to debug, out there in the real world environment ... so you need a remote logger for your ESP32!
 
 For me, it was a Solar-Power Meter, built with ESP32 and INA219 and WiFi, installed under the roof, to measure the Solar current/voltage and sending it to ThinSpeak cloud. 
 Weeks later, the data visible in the ThingSpeak cloud suddenly showed a single measure of maximum solar power at midnight. That's impossible in Germany for sure, but what is the root cause for it? Is it something in the Solar Controller, some strange overvoltage, or a bug in my ESP32 IoT device? It happened circa twice a month, so and I wanted to fix it.
@@ -26,6 +28,16 @@ My suggested solution implemented the ideas of:
 - add an handler in the ESP32 WebServer to send the log-line buffer after each GET requests from Browser,
 - let the Web Browser automatically send a GET-request every second and let it append the log-lines on the screen,
 - provide a CURL scirpt which requests the log-line buffer every second and writes them into files in your Laptop/PC/Raspi,
-- use the ESP32 SPIFFS to store the used HTML files and the CURL script, accessable by opening the IP address,<img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
+- use the ESP32 SPIFFS to store the used HTML files and the CURL script, accessable by opening the IP address,
 <br/>
-## 2 - Also, I added some Highcharts example code to implement a simple replacement of Arduino Serial-Plotter using WiFi:- use Highcharts to visualize ESP32 data of slow changing values and mid-term logging,- Highcharts source: https://www.highcharts.com/demo- the Highcharts script in the HTML page requests data from the ESP32 every 10 seconds (can be configured in HTML file)- the ESP32 added a handler in the WebServer to send the data after each GET requests back to the Browser script,- a Highcharts mult-line graph needs data in a JSON object compiled and sent by ESP32,<img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
+<img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
+<br/>
+## 2 - Also, I added some Highcharts example code to implement a simple replacement of Arduino Serial-Plotter using WiFi:
+- use Highcharts to visualize ESP32 data of slow changing values and mid-term logging,
+- Highcharts source: https://www.highcharts.com/demo
+- the Highcharts script in the HTML page requests data from the ESP32 every 10 seconds (can be configured in HTML file)
+- the ESP32 added a handler in the WebServer to send the data after each GET requests back to the Browser script,
+- a Highcharts mult-line graph needs data in a JSON object compiled and sent by ESP32,
+<br/>
+<img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
+<br/>
