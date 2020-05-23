@@ -1,6 +1,5 @@
 # ESP32_remote_longterm_logging
 Automatic long-term logging for remote ESP32 IoT devices, by the Web Browser or an CURL script
-
 read time: 30 min / understand time: 1 hour / test-it-out time: 1 hours
 
 ## This project will tell you a story you may already know well: after many days of developing an IoT device and spending also some nights to test it in your workroom, you finally install it in the target location. Then, after many days of bugless work, you surprisingly encounter some wrong results in the IoT data. Such errors can be seldom and hard to debug, out there in the real world environment ... so you need a remote logger for your ESP32!
