@@ -1,0 +1,159 @@
+<!DOCTYPE HTML><html>
+<!-- Rui Santos - Complete project details at https://randomnerdtutorials.com/esp32-esp8266-plot-chart-web-server/
+
+W. Franke 2020 - added Multi Line charts
+sources:
+* https://arduinodiy.wordpress.com/2019/08/05/
+* https://gitlab.com/diy_bloke/highcharts/blob/master/index.html
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <style>
+    body {
+      min-width: 310px;
+      max-width: 800px;
+      height: 400px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-family: Arial;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>ESP32 Random Data for Highcharts</h2>
+  <div id="chart-data1" class="container"></div>
+  <div <p></p> </div>
+  <div <p></p> </div>
+  <div <p></p> </div>
+  <div <p></p> </div>
+  <div <p></p> </div>
+  <div id="chart-data2" class="container"></div>
+</body>
+
+<script>
+
+//data1 chart
+var chartT = new Highcharts.Chart({
+  chart:{ renderTo : 'chart-data1' },
+  title: { text: 'Random Generator rnd(100)' },
+  subtitle: {text: 'subtitle data1'},
+
+  legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+  series: [{
+    name: 'Line Name 1',
+    data: [],
+    color: '#059e8a',
+    lineWidth: 4,
+    showInLegend: true
+  }, {
+    name: 'Line Name 2',
+    data: [],
+    color: '#18009c',
+    lineWidth: 2,
+    showInLegend: true
+  }],
+
+  plotOptions: {
+    line: { animation: true,
+      dataLabels: { enabled: true }
+    },
+    series: { color: '#059e8a' }
+  },
+
+  xAxis: { type: 'datetime',
+    dateTimeLabelFormats: { second: '%H:%M:%S' }
+  },
+
+  yAxis: {
+    title: { text: 'data1 (Celsius)' }
+  },
+
+  credits: { enabled: true }
+  });
+
+setInterval(function ( ) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     //get single value: y = parseFloat(this.responseText);
+     //get multiple data via JSON object
+     var x = (new Date()).getTime();
+        var myObj=JSON.parse(this.responseText);
+        var y=myObj.JSONdata[0]; 
+        var z=myObj.JSONdata[1];
+
+      if(chartT.series[0].data.length > 40) {
+        chartT.series[0].addPoint([x, y], true, true, true);
+        chartT.series[1].addPoint([x, z],true,true,true);
+      } else {
+        chartT.series[0].addPoint([x, y], true, false, true);
+        chartT.series[1].addPoint([x, z],true,false,true);
+      }
+    }
+  };
+  xhttp.open("GET", "/get_chart1_json", true);
+  xhttp.send();
+}, 10000 ) ;   // get values from Server every x ms
+
+
+//data2 chart
+var chartH = new Highcharts.Chart({
+  chart:{ renderTo:'chart-data2' },
+  title: { text: 'title data2' },
+  subtitle: {text: 'subtitle data2'},
+
+  legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+  series: [{
+    showInLegend: false,
+    data: []
+  }],
+  plotOptions: {
+    line: { animation: false,
+      dataLabels: { enabled: true }
+    }
+  },
+  xAxis: {
+    type: 'datetime',
+    dateTimeLabelFormats: { second: '%H:%M:%S' }
+  },
+  yAxis: {
+    title: { text: 'data2 (%)' }
+  },
+  credits: { enabled: false }
+});
+setInterval(function ( ) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var x = (new Date()).getTime(),
+          y = parseFloat(this.responseText);
+      //console.log(this.responseText);
+      if(chartH.series[0].data.length > 40) {
+        chartH.series[0].addPoint([x, y], true, true, true);
+      } else {
+        chartH.series[0].addPoint([x, y], true, false, true);
+      }
+    }
+  };
+  xhttp.open("GET", "/get_chart2_json", true);
+  xhttp.send();
+}, 10000 ) ;   // get values from Server every x ms
+
+</script>
+
+</html>

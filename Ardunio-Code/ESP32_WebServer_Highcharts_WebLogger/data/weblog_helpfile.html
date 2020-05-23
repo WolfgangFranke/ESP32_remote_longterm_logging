@@ -1,0 +1,49 @@
+<!DOCTYPE HTML><html>
+<!-- W.Franke 2020 - Help File of Web Visualization Demo
+-->
+
+<head>
+  <meta charset="UTF-8" name=\"viewport\" content=\"width=device-width, initial-scale=1, user-scalable=no\"/>
+  <title>ESP32 Help & Information</title>
+</head>
+
+<body>
+<h2>ESP32 Web Visualization Demo - Help & Information</h2>
+<hr />
+<br/>
+
+<p style=font-family:Courier New>
+<br/>(A) ESP32 data visualized in Web Browser using Highcharts graphs
+<font size=-1>
+<br/> *Source: https://www.highcharts.com/demo
+<br/> *use case: short term visualization of numeric data (<100 in time series) as line-charts in Web Browser
+<br/> - the Browser opens the page 'ESP-IP-address/open_charts' to receive the Highcharts-HTML file stored in ESP32 SPIFFS,
+<br/> - the downloaded Highcharts-HTML page runs the Highcharts scripts, embedded in a GET-request loop to receive data from ESP32 every x sec:
+<br/> - the Web Browser sends an HTTP GET request to ESP32 Web Server, and waits to receive a JSON object to be parsed and data added to highcharts,
+<br/> - the ESP32 program puts variables into a JSON object, then sends it as GET-response back to the Web Browser,
+<br/>
+<br/>
+</font>
+
+<br/>(B) ESP32 Serial logger into Web Browser
+<font size=-1>
+<br/> *use case 1: mid term logging (<12h) of ESP32 Log-lines to get printed in a Web Browser (via HTML-GET/JSON)
+<br/> - the Browser opens the page 'ESP-IP-address/open_logger' to receive the WebLogger-HTML file stored in ESP32 SPIFFS
+<br/> - the ESP32 program/scetch continuously prints Log entries into a log-line buffer
+<br/> - the downladed Weblogger-HTML page runs a script sending HTTP GET requests every 1s to the ESP32 Web Server to request the log-line buffer
+<br/> - the ESP32 program puts all filled log-line entries into a JSON object, sends it as GET-response to the Web Browser
+<br/> - the Web Browser script parses the incoming JSON object and adds all log lines to the browser screen,
+<br/> - a good example is: max 14 log-lines, with a GET-request interval of 1s, which adds some safety in case of one failed GET:
+<br/>
+<br/> *use case 2: long term logging of ESP32 Log-lines, can be CURLed/saved in a file (tested 25MB/day with 6 log-lines per second):
+<br/> - the ESP32 program/scetch continuously prints Log entries into a log-line buffer
+<br/> - a CURL-script sends every 1 sec a HTTP GET requests to ESP32 Web Server (/curl_loglines_csv)
+<br/> - the ESP32 generates an CVS object from the available log-lines (also adds CR/LF at end of file)
+<br/>&nbsp&nbspand sends the CSV as GET-response back to the CURL script, to be saved/appended to a file on PC hard disk,
+<br/> - a good example is like in use case 1: max 14 log-lines, with a GET-request interval of 1s
+<br/> - the belonging bash script can be downloaded from ESP32 SPIFFS (save-as-file from /curl_script.sh keeps the code formatting)
+</font>
+</p>
+
+</body>
+</html>
