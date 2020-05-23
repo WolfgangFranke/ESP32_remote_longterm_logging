@@ -16,7 +16,8 @@ Known issue: the Arduino OTA feature can only send code to the remote ESP32, but
 
 After implementing my simple solution for long-term logging of data entries from an remote ESP32 IoT device (by using a Web Browser or the CURL script), I was surprised to see:
 - in that seldom moments of wrong results, an I2C failure happened and the I2C-read from INA219 returned a totally wrong results (I also learned that Wire.requestFrom() does NOT return the number bytes correctly received, see source: https://github.com/arduino/ArduinoCore-avr/issues/171),
-- additionally and totally unseen before, the ESP32 device did one reboot! Condition was, when the Thingspeak cloud was not reachable for a while (network issue or cloud outage) and the ThingSpeak library failed to upload it's data 8 times with Error -301, then exactly in the moment of that 8th attempt, the ESP32 did start to reboot.
+- additionally and totally unseen before, the ESP32 device did reboot! Condition is, when the Thingspeak cloud was not reachable for a while (network issue or cloud outage?) and the ThingSpeak library fails to upload with Error -301, then
+one of the later upload attempts (I saw 2nd and 8th upload attempt with pause of 15 min) will cause the ESP32 to reboot.
 <br/>
 
 ## 1 - How the "Automatic long-term logging for remote ESP32 IoT devices" works
