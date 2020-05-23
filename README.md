@@ -7,7 +7,7 @@ Then, after many days of bugless work, you surprisingly encounter some wrong res
 Such errors can occure seldomly and are hard to debug, out there in the real world environment ... so you need a remote logger for your ESP32!
 
 For me, it was a Solar-Power Meter, built with ESP32 and INA219 and WiFi, installed under the roof, to measure the Solar current/voltage and sending it to ThinSpeak cloud.
-After some weeks, the data sent to the ThingSpeak cloud suddenly showed a measure of the maximum solar power at midnight! That's impossible in Germany for sure, but what is the root cause for it? Is it something in the Solar Controller, some strange overvoltage, or a bug in my ESP32 IoT device? It happened circa twice a month, so and I wanted to fix it.
+After some weeks, the data sent to the ThingSpeak cloud suddenly showed a measure of the maximum solar power in the middle of the night! That's impossible in Germany for sure, but what is the root cause for it? Is it something in the Solar Controller, some strange overvoltage, or a bug in my ESP32 IoT device? It happened circa twice a month, so and I wanted to fix it.
 
 Known issue: the Arduino OTA feature can only send code to the remote ESP32, but does not connect the serial port over WiFi. There have been a couple of ideas to receive log entries from a remote ESP32 IoT device connected to WiFi on your Laptop or PC, just to mention two, which I do not find convenient enough: 
 - implement Telnet on ESP32 and use PUTTY locally on your Laptop/PC to retrieve the serial log from the ESP,
