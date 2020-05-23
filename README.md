@@ -31,7 +31,7 @@ My suggested solution implemented the ideas of:
 - access all logging features by just opening the IP address in the Web Browser,
 <br/>
 
-<img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
+<img src="doc/ESP32_WebLogger.jpg" width="500">
 <br/>
 
 ## 2 - Also, I added some Highcharts example code to implement a simple replacement of Arduino Serial-Plotter using WiFi:
@@ -42,5 +42,5 @@ My suggested solution implemented the ideas of:
 - a Highcharts mult-line graph needs multiple data compiled into a JSON object to be returned,
 <br/>
 
-<img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
+<img src="doc/ESP32_Highcharts.jpg" width="500">
 <br/>
