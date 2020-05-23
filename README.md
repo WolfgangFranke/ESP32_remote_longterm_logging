@@ -13,3 +13,18 @@ There have been a couple of ideas to receive log entries from a remote ESP32 IoT
 - implement Telnet on ESP32 and use PUTTY locally on your Laptop/PC to retrieve the serial log from the ESP,
 - other solutions suggest to redirect the TX pin output of the standard Serial.Print() to a buffer which could be requested by a Web Browser,
 
+<br/>
+After implementing my simple solution for long-term logging of data entries from an remote ESP32 IoT device (by using a Web Browser or the CURL script), I was surprised to see:
+- in that seldom moments of wrong results, an I2C failure happened and the I2C-read from INA219 returned a totally wrong results (I learned that Wire.requestFrom() does NOT return the number bytes correctly received, see source: https://github.com/arduino/ArduinoCore-avr/issues/171),
+- additionally and totally unseen before, the ESP32 device did one reboot! Condition was, when the Thingspeak cloud was not reachable for a while (network issue or cloud outage) and the ThingSpeak library failed to upload it's data 8 times with Error -301, then exactly in that second of the 8th attempt the ESP did reboot.
+<br/>
+## 1 - How the "Automatic long-term logging for remote ESP32 IoT devices" worksMy suggested solution implemented the ideas of:
+- keep the Serial.Print() for local debugging and for short-term logging only (by cable),
+- use a new LogLinePrint() to write log-items especially made for long-term logging,
+- the new LogLinePrint() stores all log items into a buffer (clears buffer after send),
+- add an handler in the ESP32 WebServer to send the log-line buffer after each GET requests from Browser,
+- let the Web Browser automatically send a GET-request every second and let it append the log-lines on the screen,
+- provide a CURL scirpt which requests the log-line buffer every second and writes them into files in your Laptop/PC/Raspi,
+- use the ESP32 SPIFFS to store the used HTML files and the CURL script, accessable by opening the IP address,<img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
+<br/>
+## 2 - Also, I added some Highcharts example code to implement a simple replacement of Arduino Serial-Plotter using WiFi:- use Highcharts to visualize ESP32 data of slow changing values and mid-term logging,- Highcharts source: https://www.highcharts.com/demo- the Highcharts script in the HTML page requests data from the ESP32 every 10 seconds (can be configured in HTML file)- the ESP32 added a handler in the WebServer to send the data after each GET requests back to the Browser script,- a Highcharts mult-line graph needs data in a JSON object compiled and sent by ESP32,<img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
