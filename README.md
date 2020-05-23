@@ -27,8 +27,8 @@ My suggested solution implemented the ideas of:
 - add an handler in the ESP32 WebServer to send the log-line buffer after each GET requests from Browser,
 - let the Web Browser automatically send a GET-request every second and let it append the log-lines on the screen,
 - provide a CURL scirpt which requests the log-line buffer every second and writes them into files on your Laptop/PC or Raspi automatically and unsupervised,
-- use the ESP32 SPIFFS to store the used HTML files and the CURL script (don't forget to upload the 'data' files together with your code in the Arduino IDE), 
-- access all logging features by just opening the IP address in the Web Browser,
+- use the ESP32 SPIFFS to store the used HTML files and the CURL script (don't forget to upload the 'data folder' files together with your code in the Arduino IDE), 
+- access all logging features by just opening the IP address in the Web Browser to open the main web page,
 <br/>
 
 <img src="doc/ESP32_WebLogger.jpg" width="500">
@@ -37,9 +37,10 @@ My suggested solution implemented the ideas of:
 ## 2 - Also, I added some Highcharts example code to implement a simple replacement of Arduino Serial-Plotter using WiFi:
 - use Highcharts to visualize ESP32 data of slow changing values and mid-term logging in an Web Browser,
 - Highcharts source: https://www.highcharts.com/demo
-- the Highcharts script in the HTML page requests data from the ESP32 every 10 seconds (can be configured in HTML file)
+- the Highcharts script running in the HTML of the Web Browser requests data from the ESP32 every 10 seconds (can be configured in HTML file)
 - the ESP32 added a handler in the WebServer to send the data after each GET requests back to the Browser script,
 - a Highcharts mult-line graph needs multiple data compiled into a JSON object to be returned,
+- access also this logging features by just opening the IP address in the Web Browser,
 <br/>
 
 <img src="doc/ESP32_Highcharts.jpg" width="500">
