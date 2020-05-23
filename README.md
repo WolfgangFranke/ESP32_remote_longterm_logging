@@ -1,5 +1,4 @@
-# ESP32_remote_longterm_logging
-Automatic long-term logging for remote ESP32 IoT devices, by the Web Browser or an CURL script
+# Automatic long-term logging for remote ESP32 IoT devices, by the Web Browser or an CURL script
 
 read time: 30 min / understand time: 1 hour / test-it-out time: 1 hours
 
@@ -17,7 +16,7 @@ There have been a couple of ideas to receive log entries from a remote ESP32 IoT
 <br/>
 
 After implementing my simple solution for long-term logging of data entries from an remote ESP32 IoT device (by using a Web Browser or the CURL script), I was surprised to see:
-- in that seldom moments of wrong results, an I2C failure happened and the I2C-read from INA219 returned a totally wrong results (I learned that Wire.requestFrom() does NOT return the number bytes correctly received, see source: https://github.com/arduino/ArduinoCore-avr/issues/171),
+- in that seldom moments of wrong results, an I2C failure happened and the I2C-read from INA219 returned a totally wrong results (I also learned that Wire.requestFrom() does NOT return the number bytes correctly received, see source: https://github.com/arduino/ArduinoCore-avr/issues/171),
 - additionally and totally unseen before, the ESP32 device did one reboot! Condition was, when the Thingspeak cloud was not reachable for a while (network issue or cloud outage) and the ThingSpeak library failed to upload it's data 8 times with Error -301, then exactly in that second of the 8th attempt the ESP did reboot.
 <br/>
 
