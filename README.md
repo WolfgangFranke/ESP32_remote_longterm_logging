@@ -30,8 +30,10 @@ My suggested solution implemented the ideas of:
 - provide a CURL scirpt which requests the log-line buffer every second and writes them into files in your Laptop/PC/Raspi,
 - use the ESP32 SPIFFS to store the used HTML files and the CURL script, accessable by opening the IP address,
 <br/>
+
 <img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
 <br/>
+
 ## 2 - Also, I added some Highcharts example code to implement a simple replacement of Arduino Serial-Plotter using WiFi:
 - use Highcharts to visualize ESP32 data of slow changing values and mid-term logging,
 - Highcharts source: https://www.highcharts.com/demo
@@ -39,5 +41,6 @@ My suggested solution implemented the ideas of:
 - the ESP32 added a handler in the WebServer to send the data after each GET requests back to the Browser script,
 - a Highcharts mult-line graph needs data in a JSON object compiled and sent by ESP32,
 <br/>
+
 <img src="1_RollerBlind/1_RollerBlind_Photo01.jpg" width="500">
 <br/>
